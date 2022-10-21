@@ -1,5 +1,6 @@
 import keyCheck
 import dsCommon
+import computerStatus
 
 
 def main():
@@ -22,6 +23,24 @@ def main():
         keyCheck.describe_key(api_config)
     except:
         print(f"Key could not be described.")
+        quit()
+
+    try:
+        paged_computers = computerStatus.gather_computers(api_config)
+    except:
+        print(f"Computer gathering could not be completed.")
+        quit()
+
+    try:
+        computerStatus.computer_load(paged_computers)
+    except:
+        print(f"Computers could not be loaded")
+        quit()
+
+    try:
+        computerStatus.get_count()
+    except:
+        print(f"Count could not be gathered.")
         quit()
 
 
